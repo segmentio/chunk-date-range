@@ -6,7 +6,7 @@
 ## Quickstart
 
 ```javascript
-var chunk = require('./');
+var chunk = require('chunk-date-range');
 
 var start = new Date('5/11/2013')
   , end = new Date('5/20/2013')
@@ -32,14 +32,14 @@ chunk(start, end, chunks);
 
   returns `chunks` evenly spaced intervals beginning with `start` and ending with `end` in the form
 
-  ```javascript
-  [
-    {
-      start: Date
-      end: Date
-    }
-  ]
-  ```
+```javascript
+[
+  {
+    start: Date
+    end: Date
+  }
+]
+```
 
 ## License
 
