@@ -4,7 +4,9 @@
   "description": "Split a date range into chunks of equal size",
   "version": "0.0.1",
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "component/map": "0.0.1"
+  },
   "development": {},
   "license": "MIT",
   "main": "index.js",
