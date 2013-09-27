@@ -3,7 +3,48 @@
 
   Split a date range into a certain amount of chunks
 
-## License 
+## Quickstart
+
+```javascript
+var chunk = require('./');
+
+var start = new Date('5/11/2013')
+  , end = new Date('5/20/2013')
+  , chunks = 2;
+
+chunk(start, end, chunks);
+
+/**
+ * [ { start: Sat May 11 2013 00:00:00 GMT-0700 (PDT),
+ *   end: Wed May 15 2013 12:00:00 GMT-0700 (PDT) },
+ * { start: Wed May 15 2013 12:00:00 GMT-0700 (PDT),
+ *   end: Mon May 20 2013 00:00:00 GMT-0700 (PDT) } ]
+ */
+```
+
+## API
+
+### chunkDates(start, end, chunks)
+
+  * start - Date to start from
+  * end - Date to end with
+  * chunks - number of chunks to split into
+
+  returns `chunks` evenly spaced intervals beginning with `start` and ending with `end` in the form
+
+  ```javascript
+  [
+    {
+      start: Date
+      end: Date
+    }
+  ]
+  ```
+
+
+
+
+## License
 
 (The MIT License)
 
