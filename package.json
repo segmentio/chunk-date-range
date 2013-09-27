@@ -1,5 +1,5 @@
 {
-  "name": "chunk-dates",
+  "name": "chunk-date-range",
   "version": "0.0.1",
   "description": "Split a date range into a certain amount of chunks",
   "keywords": [],

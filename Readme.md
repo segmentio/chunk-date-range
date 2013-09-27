@@ -1,5 +1,5 @@
 
-# chunk-dates
+# chunk-date-range
 
   Split a date range into a certain amount of equal sized chunks.
 

@@ -1,7 +1,7 @@
 var assert = require('assert')
   , chunk = require('./');
 
-describe('chunk-dates', function () {
+describe('chunk-date-range', function () {
 
   it('should split the dates into equal size chunks', function () {
     var start = new Date('5/1/2013')
