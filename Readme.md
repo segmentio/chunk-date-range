@@ -24,7 +24,7 @@ chunk(start, end, chunks);
 
 ## API
 
-### chunkDates(start, end, chunks)
+### chunkDateRange(start, end, chunks)
 
   * start - Date to start from
   * end - Date to end with
