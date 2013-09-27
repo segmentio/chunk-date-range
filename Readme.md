@@ -1,7 +1,7 @@
 
 # chunk-dates
 
-  Split a date range into a certain amount of chunks
+  Split a date range into a certain amount of equal sized chunks.
 
 ## Quickstart
 
@@ -40,9 +40,6 @@ chunk(start, end, chunks);
     }
   ]
   ```
-
-
-
 
 ## License
 
