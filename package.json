@@ -1,0 +1,19 @@
+{
+  "name": "chunk-dates",
+  "version": "0.0.1",
+  "description": "Split a date range into a certain amount of chunks",
+  "keywords": [],
+  "author": "segmentio <friends@segment.io>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/segmentio/chunk-dates.git"
+  },
+  "dependencies": {
+    "map-component": "0.0.1"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "main": "index"
+}

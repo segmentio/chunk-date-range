@@ -1,0 +1,14 @@
+{
+  "name": "chunk-dates",
+  "repo": "segmentio/chunk-dates",
+  "description": "Split a date range into desired chunks of equal size",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}
