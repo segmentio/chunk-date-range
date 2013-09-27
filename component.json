@@ -1,7 +1,7 @@
 {
   "name": "chunk-date-range",
   "repo": "segmentio/chunk-date-range",
-  "description": "Split a date range into desired chunks of equal size",
+  "description": "Split a date range into chunks of equal size",
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {},

@@ -1,7 +1,7 @@
 {
   "name": "chunk-date-range",
   "version": "0.0.1",
-  "description": "Split a date range into a certain amount of chunks",
+  "description": "Split a date range into chunks of equal size",
   "keywords": [],
   "author": "segmentio <friends@segment.io>",
   "repository": {
