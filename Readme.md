@@ -1,16 +1,16 @@
 
 # chunk-date-range
 
-  Split a date range into a certain amount of equal sized chunks.
+  Split a date range into a certain amount of equal sized chunks, or into boundaries by 'day', 'week', 'year', etc.
 
 ## Quickstart
 
 ```javascript
 var chunk = require('chunk-date-range');
 
-var start = new Date('5/11/2013')
-  , end = new Date('5/20/2013')
-  , chunks = 2;
+var start = new Date('5/11/2013');
+var end = new Date('5/20/2013');
+var chunks = 2;
 
 chunk(start, end, chunks);
 
@@ -20,6 +20,17 @@ chunk(start, end, chunks);
  * { start: Wed May 15 2013 12:00:00 GMT-0700 (PDT),
  *   end: Mon May 20 2013 00:00:00 GMT-0700 (PDT) } ]
  */
+
+chunk(start, end, 'day');
+
+/**
+ * [ { start: Sat May 11 2013 00:00:00 GMT-0700 (PDT),
+ *   end: Sat May 11 2013 17:00:00 GMT-0700 (PDT) },
+ * [...]
+ * { start: Sun May 19 2013 17:00:00 GMT-0700 (PDT),
+ *   end: Mon May 20 2013 00:00:00 GMT-0700 (PDT) }
+ */
+
 ```
 
 ## API
@@ -28,7 +39,7 @@ chunk(start, end, chunks);
 
   * start - Date to start from
   * end - Date to end with
-  * chunks - number of chunks to split into
+  * chunks - number of chunks to split into, or the duration
 
   returns `chunks` evenly spaced intervals beginning with `start` and ending with `end` in the form
 

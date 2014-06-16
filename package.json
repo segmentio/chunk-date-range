@@ -9,11 +9,10 @@
     "url": "git://github.com/segmentio/chunk-dates.git"
   },
   "dependencies": {
-    "map-component": "0.0.1"
+    "date-math": "0.0.1"
   },
   "devDependencies": {
-    "mocha": "*",
-    "should": "*"
+    "mocha": "*"
   },
   "main": "index"
 }
