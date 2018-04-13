@@ -12,7 +12,11 @@
     "date-math": "0.0.1"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "*",
+    "chai": "*"
   },
-  "main": "index"
+  "main": "index",
+  "scripts": {
+    "test": "mocha"
+  }
 }
