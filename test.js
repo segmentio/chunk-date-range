@@ -2,6 +2,7 @@ var assert = require('assert');
 var chunk = require('./');
 var Dates = require('date-math');
 var expect = require('chai').expect;
+var each = require('lodash').each;
 
 describe('chunk-date-range', function() {
   describe('by number', function() {
@@ -44,19 +45,16 @@ describe('chunk-date-range', function() {
       });
     });
 
-    describe('month', () => {
-      var duration = 'month';
-      it('31 days is 1', () => {
-        var start = fromDays(31);
-        console.log({ start });
-        var chunks = chunk(start, new Date(), duration);
-        expect(chunks.length).to.equal(1);
-      });
-      it('32 days is 2', () => {
-        var start = fromDays(32);
-        console.log({ start });
-        var chunks = chunk(start, new Date(), duration);
-        expect(chunks.length).to.equal(2);
+    each(chunk.DAYS, (days, duration) => {
+      describe(duration, () => {
+        [1, 2, 3, 4, 5].forEach(expectedChunk => {
+          it(`${expectedChunk * days} days is ${expectedChunk} ${duration} chunks`, () => {
+            var start = fromDays(expectedChunk * days);
+            // console.log({ start });
+            var chunks = chunk(start, new Date(), duration);
+            expect(chunks.length).to.equal(expectedChunk);
+          });
+        });
       });
     });
   });

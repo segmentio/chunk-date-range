@@ -1,6 +1,12 @@
 
 var Dates = require('date-math');
 
+var DAYS = {
+  'week': 7,
+  'month': 31,
+  // TODO do we care about leap years? This is a rough estimate to break the chunks
+  'year': 365 
+};
 /**
  * Module exports
  *
@@ -44,6 +50,13 @@ function number(start, end, size){
   dates[dates.length - 1].end = end;
   return dates;
 }
+/**
+ * @param  {Date} closerToNow (usually now)
+ * @param  {Date} past
+ */
+function daysBetween(closerToNow, past) {
+  return Math.round(Math.abs(closerToNow - past)/8.64e7);
+}
 
 /**
  * Chunk the dates based upon `duration`
@@ -54,6 +67,11 @@ function number(start, end, size){
  */
 
 function duration(start, end, duration){
+  var days = DAYS[duration];
+  if(days) {
+    var slices = Math.ceil((daysBetween(end, start) + 1)/ days);
+    return  number(start, end, slices);
+  }
   var math = Dates[duration];
   if (!math) throw new Error('unsupported duration ' + duration);
 
@@ -97,3 +115,6 @@ function range(len){
   for (var i = 0; i < len; i++) arr.push(i);
   return arr;
 }
+
+// EXPOSE BUT PROTECT
+module.exports.DAYS = Object.assign({}, DAYS);

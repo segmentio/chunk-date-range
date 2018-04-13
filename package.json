@@ -12,8 +12,9 @@
     "date-math": "0.0.1"
   },
   "devDependencies": {
-    "mocha": "*",
-    "chai": "*"
+    "chai": "*",
+    "lodash": "^4.17.5",
+    "mocha": "*"
   },
   "main": "index",
   "scripts": {
