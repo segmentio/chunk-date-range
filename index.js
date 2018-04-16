@@ -69,7 +69,7 @@ function daysBetween(closerToNow, past) {
 function duration(start, end, duration){
   var days = DAYS[duration];
   if(days) {
-    var slices = Math.ceil((daysBetween(end, start) + 1)/ days);
+    var slices = Math.ceil((daysBetween(end, start))/ days);
     return  number(start, end, slices);
   }
   var math = Dates[duration];

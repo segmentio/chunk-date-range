@@ -50,12 +50,18 @@ describe('chunk-date-range', function() {
         [1, 2, 3, 4, 5].forEach(expectedChunk => {
           it(`${expectedChunk * days} days is ${expectedChunk} ${duration} chunks`, () => {
             var start = fromDays(expectedChunk * days);
-            // console.log({ start });
             var chunks = chunk(start, new Date(), duration);
+            // console.log(chunks);
             expect(chunks.length).to.equal(expectedChunk);
           });
         });
       });
+    });
+    
+    it('32 days is 2 month chunks', () => {
+      var start = fromDays(32);
+      var chunks = chunk(start, new Date(), 'month');
+      expect(chunks.length).to.equal(2);
     });
   });
 
@@ -70,10 +76,10 @@ describe('chunk-date-range', function() {
   }
 
   function getDay(time, isString) {
-    return time.getDate() + 1;
+    return time.getDate()
   }
 
   function fromDays(days) {
-    return new Date(new Date().setDate(getDay(new Date()) - days));
+    return new Date(new Date().setDate((getDay(new Date())) - days));
   }
 });
