@@ -80,6 +80,6 @@ describe('chunk-date-range', function() {
   }
 
   function fromDays(days) {
-    return new Date(new Date().setDate((getDay(new Date())) - days));
+    return new Date(new Date().setDate(getDay(new Date()) - days));
   }
 });
