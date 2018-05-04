@@ -1,11 +1,14 @@
-
 var Dates = require('date-math');
 
 var DAYS = {
-  'week': 7,
-  'month': 31,
+  week: 7,
+  month: 31,
   // TODO do we care about leap years? This is a rough estimate to break the chunks
-  'year': 365 
+  year: 365
+};
+
+var OFFSETS = {
+  day: addDays
 };
 /**
  * Module exports
@@ -21,12 +24,51 @@ var DAYS = {
  *   } ...
  */
 
-module.exports = function(start, end, chunks){
+module.exports = function(options) {
+  var start = options.start;
+  var end = options.end;
+  var chunks = options.chunks;
+  var offset = options.offset;
+
   start = new Date(start);
   end = new Date(end);
-  return typeof chunks === 'number'
-    ? number(start, end, chunks)
-    : duration(start, end, chunks);
+
+  return _offset(
+    typeof chunks === 'number'
+      ? number(start, end, chunks)
+      : duration(start, end, chunks),
+    offset
+  );
+};
+
+function _offset(chunks, offset) {
+  if (!offset) return chunks;
+  var offsetFn = OFFSETS[offset.duration];
+  var by = offset.by;
+  if (!offsetFn || by == null) return chunks;
+  // sometimes your chunks should be offset where the next start should be incremented from
+  // the last end
+  /*
+    Where:
+    [
+      { start: 'February 13, 2018', end: 'March 7, 2018' },
+      { start: 'March 7, 2018', end: 'March 31, 2018' }
+    ];
+    Need to be:
+    [
+      { start: 'February 13, 2018', end: 'March 7, 2018' },
+      { start: 'March 8, 2018', end: 'March 31, 2018' }
+    ];
+    */
+  var nextStart;
+  for (var i in chunks) {
+    var chunk = chunks[i];
+    if (nextStart) {
+      chunk.start = nextStart;
+    }
+    nextStart = offsetFn(by, chunk.end);
+  }
+  return chunks;
 }
 
 /**
@@ -37,11 +79,11 @@ module.exports = function(start, end, chunks){
  * @param {Number} chunks  number of chunks to split into
  */
 
-function number(start, end, size){
+function number(start, end, size) {
   var diff = end - start;
   var interval = diff / size;
-  var dates = range(size).map(function(i){
-    var base = +start + (i * interval);
+  var dates = range(size).map(function(i) {
+    var base = +start + i * interval;
     var floor = new Date(Math.floor(base));
     var ceil = new Date(Math.floor(base + interval));
     return entry(floor, ceil);
@@ -55,7 +97,7 @@ function number(start, end, size){
  * @param  {Date} past
  */
 function daysBetween(closerToNow, past) {
-  return Math.round(Math.abs(closerToNow - past)/8.64e7);
+  return Math.round(Math.abs(closerToNow - past) / 8.64e7);
 }
 
 /**
@@ -66,20 +108,18 @@ function daysBetween(closerToNow, past) {
  * @param {String} duration  'day', 'week', 'year', etc.
  */
 
-function duration(start, end, duration){
+function duration(start, end, duration) {
   var days = DAYS[duration];
-  if(days) {
-    var slices = Math.ceil((daysBetween(end, start))/ days);
-    return  number(start, end, slices);
+  if (days) {
+    var slices = Math.ceil(daysBetween(end, start) / days);
+    return number(start, end, slices);
   }
   var math = Dates[duration];
   if (!math) throw new Error('unsupported duration ' + duration);
 
   var roundStart = math.ceil(start);
   var roundEnd = math.floor(end);
-  var diff = roundEnd < roundStart
-    ? 0
-    : math.diff(roundStart, roundEnd);
+  var diff = roundEnd < roundStart ? 0 : math.diff(roundStart, roundEnd);
   if (!diff) return [entry(start, end)]; // they are on the same interval
 
   var arr = [];
@@ -99,7 +139,7 @@ function duration(start, end, duration){
  * @return {Object}
  */
 
-function entry(start, end){
+function entry(start, end) {
   return { start: start, end: end };
 }
 
@@ -110,11 +150,28 @@ function entry(start, end){
  * @return {Array} arr
  */
 
-function range(len){
+function range(len) {
   var arr = [];
   for (var i = 0; i < len; i++) arr.push(i);
   return arr;
 }
+
+function getDay(time) {
+  return time.getDate();
+}
+
+function fromDays(days, _day) {
+  var day = _day ? new Date(_day) : new Date();
+  return new Date(day.setDate(getDay(day) - days));
+}
+
+function addDays(days, day) {
+  return fromDays(days * -1, day);
+}
+
+module.exports.fromDays = fromDays;
+module.exports.addDays = addDays;
+module.exports.daysBetween = daysBetween;
 
 // EXPOSE BUT PROTECT
 module.exports.DAYS = Object.assign({}, DAYS);
