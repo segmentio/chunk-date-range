@@ -9,6 +9,7 @@ var DAYS = {
 
 var OFFSETS = {
   day: addDays
+  // TODO ADD month, year, week .. maybe more
 };
 /**
  * Module exports
