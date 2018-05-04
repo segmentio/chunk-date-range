@@ -1,6 +1,6 @@
 {
   "name": "chunk-date-range",
-  "version": "0.1.0",
+  "version": "0.1.1-1",
   "description": "Split a date range into chunks of equal size",
   "keywords": [],
   "author": "segmentio <friends@segment.io>",
@@ -12,7 +12,12 @@
     "date-math": "0.0.1"
   },
   "devDependencies": {
+    "chai": "*",
+    "lodash": "^4.17.5",
     "mocha": "*"
   },
-  "main": "index"
+  "main": "index",
+  "scripts": {
+    "test": "mocha"
+  }
 }
